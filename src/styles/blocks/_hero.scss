@@ -1,0 +1,70 @@
+.hero {
+    min-height: 524px;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    background: url(../images/bg-ball.png) center center / cover no-repeat;
+    padding-block: 60px;
+    background-color: var(--main-accent-color);
+    &__inner {
+        max-width: 426px;
+        padding-block: 60px;
+        row-gap: 15px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__title {
+        font-family: var(--font-family-accent);
+        text-align: center;
+        font-weight: 400;
+        font-size: 24px;
+        color: var(--color-white);
+        letter-spacing: 0.05em;
+    }
+    &__main-title {
+        font-family: var(--font-family-base);
+        font-weight: 600;
+        font-size: 31px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--color-white);
+    }
+    &__button {
+        cursor: pointer;
+        color: var(--color-white);
+        border: none;
+        background-color: var(--color-dark-bg);
+        border-radius: 20px;
+        padding: 20px 32px;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: center;
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-dark-bg);
+        }
+    }
+}
+@media (max-width: 768px) {
+    .hero {
+        &__main-title {
+            font-size: 29px;
+        }
+        &__button {
+            padding-inline: 22px;
+        }
+    }
+}
+@media (max-width: 380px) {
+    .hero {
+        padding-block: 60px;
+    }
+    .container-hero {
+        padding-inline: 8px;
+    }
+}

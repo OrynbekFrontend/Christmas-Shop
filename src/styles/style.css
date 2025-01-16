@@ -1,0 +1,574 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями
+ */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+ */
+svg *[fill] {
+  fill: currentColor;
+}
+
+svg *[stroke] {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("../fonts/Montserrat-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Montserrat;
+  src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Allura;
+  src: url("../fonts/Allura-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  font-family: var(--font-family-base);
+  position: relative;
+}
+
+.hidden {
+  overflow: hidden;
+}
+
+:root {
+  --main-accent-color: #FF4646;
+  --color-white: #FFFFFF;
+  --color-dark-bg: #181C29;
+  --color-green: #06A44F;
+  --color-puple: #4361FF;
+  --color-pink: #FF43F7;
+  --font-family-base: "Montserrat", sans-serif;
+  --font-family-accent: "Allura", sans-serif;
+  --container-width: 1276px;
+  --container-padding-x: 82px;
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.text-style {
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-dark-bg);
+  letter-spacing: 0.05em;
+}
+
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none;
+}
+
+.transform-next {
+  transform: translateX(-135px);
+}
+
+.transform-prev {
+  transform: translateX(135px);
+}
+
+.header {
+  padding-block: 12px;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__logo-wrapper {
+  column-gap: 8px;
+  display: flex;
+  padding-inline: 20px;
+  padding-block: 8px;
+}
+.header__menu-list {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+.header__menu-item {
+  padding: 12px 20px;
+}
+.header__menu-link {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .header__inner {
+    padding-inline: 0;
+  }
+  .header__logo-wrapper {
+    max-width: 141px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .header__menu {
+    display: none;
+  }
+}
+.hero {
+  min-height: 524px;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  background: url(../images/bg-ball.png) center center/cover no-repeat;
+  padding-block: 60px;
+  background-color: var(--main-accent-color);
+}
+.hero__inner {
+  max-width: 426px;
+  padding-block: 60px;
+  row-gap: 15px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero__title {
+  font-family: var(--font-family-accent);
+  text-align: center;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--color-white);
+  letter-spacing: 0.05em;
+}
+.hero__main-title {
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 31px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-white);
+}
+.hero__button {
+  cursor: pointer;
+  color: var(--color-white);
+  border: none;
+  background-color: var(--color-dark-bg);
+  border-radius: 20px;
+  padding: 20px 32px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.hero__button:hover {
+  background-color: var(--color-white);
+  color: var(--color-dark-bg);
+}
+
+@media (max-width: 768px) {
+  .hero__main-title {
+    font-size: 29px;
+  }
+  .hero__button {
+    padding-inline: 22px;
+  }
+}
+@media (max-width: 380px) {
+  .hero {
+    padding-block: 60px;
+  }
+  .container-hero {
+    padding-inline: 8px;
+  }
+}
+.about {
+  background-color: var(--main-accent-color);
+  padding-block: 60px;
+}
+.about__inner {
+  border-radius: 20px;
+  background-color: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  padding-left: 60px;
+  min-height: 528px;
+}
+.about__image {
+  border-radius: 20px 20px 20px 20px;
+  display: block;
+  width: 52%;
+  object-fit: cover;
+}
+.about__info {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-white);
+  padding-block: 60px;
+  margin-block: 90px;
+  gap: 20px;
+}
+.about__info--title {
+  color: var(--main-accent-color);
+  text-align: left;
+  letter-spacing: 0.16em;
+}
+.about__info--description {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-dark-bg);
+}
+
+@media (max-width: 1024px) {
+  .about--container {
+    padding-inline: 8px;
+  }
+  .about__inner {
+    padding-left: 40px;
+  }
+}
+@media (max-width: 768px) {
+  .about__info {
+    max-width: 256px;
+  }
+  .about__inner {
+    padding-left: 10px;
+  }
+}
+@media (max-width: 530px) {
+  .about__inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-inline: 0;
+  }
+  .about__image {
+    width: 100%;
+  }
+  .about__info {
+    padding-inline: 20px;
+    margin-block: 0;
+    max-width: none;
+    border-radius: 20px;
+  }
+}
+.burger-button {
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  position: relative;
+  aspect-ratio: 1;
+  width: 44px;
+}
+.burger-button::after {
+  content: "";
+  width: 50%;
+  height: 2px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  background-color: var(--color-dark-bg);
+  box-shadow: 0 -8px;
+  border-radius: 5px;
+}
+
+.burger-button--close {
+  padding: 0;
+  background-color: #fff;
+  border: none;
+  position: relative;
+  aspect-ratio: 1;
+  width: 44px;
+}
+.burger-button--close::after, .burger-button--close::before {
+  content: "";
+  width: 55%;
+  height: 2px;
+  position: absolute;
+  top: 45%;
+  left: 5px;
+  background-color: var(--color-dark-bg);
+  border-radius: 5px;
+  translate: 0;
+  box-shadow: none;
+  transition: 0.3s;
+}
+.burger-button--close::before {
+  rotate: 45deg;
+}
+.burger-button--close::after {
+  rotate: -45deg;
+}
+
+@media (min-width: 768px) {
+  .burger-button {
+    display: none;
+  }
+}
+.mobile-overlay {
+  display: none;
+  margin-top: 64px;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.mobile-overlay--body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  transition: 1s;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .mobile-overlay {
+    display: none !important;
+  }
+}
+.slider {
+  padding-block: 60px;
+  background-color: var(--main-accent-color);
+}
+.slider__title {
+  text-align: center;
+  color: var(--color-white);
+}
+.slider__list {
+  position: relative;
+  transition: 0.5s all;
+  display: flex;
+  column-gap: 20px;
+}
+.slider__inner {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.slider__header {
+  row-gap: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.slider__item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  column-gap: 20px;
+}
+.slider__item_image {
+  width: 200px;
+  border-radius: 20px;
+}
+.slider__item_text {
+  color: var(--color-white);
+  font-size: 79px;
+}
+.slider__button {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 20px;
+}
+.slider__button-arrow {
+  width: 56px;
+  height: 56px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  opacity: 0.5;
+  background-color: var(--main-accent-color);
+}
+.slider__button-arrow svg path {
+  color: rgba(255, 255, 255, 0.9);
+}
+.slider__button-arrow-active {
+  border: 1px solid var(--color-white);
+  cursor: pointer;
+  opacity: 1;
+}
+.slider__button-arrow-active svg path {
+  color: rgb(255, 255, 255);
+}
+.slider__button-arrow-active:hover {
+  background-color: var(--color-white);
+  border: none;
+}
+.slider__button-arrow-active:hover svg path {
+  color: var(--main-accent-color);
+}
+
+@media (max-width: 768px) {
+  .slider__inner {
+    padding-inline: 8px;
+  }
+  .slider__item_text {
+    font-size: 76px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

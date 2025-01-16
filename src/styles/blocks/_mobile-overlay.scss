@@ -1,0 +1,22 @@
+.mobile-overlay {
+    display: none;
+    margin-top: 64px;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    &--body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        transition: 1s;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+@media (min-width: 768px) {
+    .mobile-overlay {
+        display: none !important;
+    }
+}

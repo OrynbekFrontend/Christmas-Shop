@@ -1,0 +1,14 @@
+@use './base/normalize';
+@use './base/fonts';
+@use './base/globals';
+@use './base/variables';
+@use './base/utils';
+
+@use './blocks/header';
+@use './blocks/hero';
+@use './blocks/about';
+@use './blocks/burger-button';
+@use './blocks/mobile-overlay';
+@use './blocks/slider';
+
+

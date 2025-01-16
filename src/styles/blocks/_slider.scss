@@ -1,0 +1,85 @@
+.slider {
+    padding-block: 60px;
+    background-color: var(--main-accent-color);
+    &__title {
+        text-align: center;
+        color: var(--color-white);
+    }
+    &__list {
+        position: relative;
+        transition: .5s all;
+        display: flex;
+        column-gap: 20px;
+    }
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+    &__header {
+        row-gap: 12px;
+        display: flex;
+        flex-direction: column;
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+        column-gap: 20px;
+        &_image {
+            width: 200px;
+            border-radius: 20px;
+        }
+        &_text {
+            color: var(--color-white);
+            font-size: 79px;
+        }
+    }
+    &__button {
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 20px;
+        &-arrow {
+            width: 56px;
+            height: 56px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            opacity: .5;
+            background-color: var(--main-accent-color);
+            svg {
+                path {
+                    color: rgba(255, 255, 255, 0.9);
+                }
+            }
+            &-active {
+                border: 1px solid var(--color-white);
+                cursor: pointer;
+                opacity: 1;
+                svg {
+                    path {
+                        color: rgb(255, 255, 255);
+                    }
+                }
+                &:hover {
+                    background-color: var(--color-white);
+                    border: none;
+                    svg {
+                        path {
+                            color: var(--main-accent-color);
+                        }
+                }
+            }
+        }
+    }
+}
+}
+@media (max-width: 768px) {
+    .slider {
+        &__inner {
+            padding-inline: 8px;
+        }
+        &__item_text {
+            font-size: 76px;
+        }
+    }
+}
