@@ -1,66 +1,94 @@
 function slider() {
-    const sliderInner = document.querySelector('.slider__inner');
     const slider = document.querySelector('.slider__list');
     const prevButton = document.querySelector('.slider__button-prev');
     const nextButton = document.querySelector('.slider__button-next');
-    let totalWidthSlider = 2210;
+    function calculateMoveDistance() {
+        const screenWidth = window.innerWidth;
+        const totalWidth = slider.scrollWidth;
+        const visibleWidth = slider.offsetWidth;
+        const clickToMove = screenWidth <= 768 && screenWidth >= 380 ? 6 : 3;
+        return (totalWidth - visibleWidth) / clickToMove;
+    }
     
     
 
     let offset = 0;
     function init() {
-        let sliderVisisbleArea = sliderInner.offsetWidth;
-        let transform;
-        if (sliderVisisbleArea >= 769) {
-            transform = Math.round((totalWidthSlider - sliderVisisbleArea) / 3);
+        const screenWidth = window.innerWidth;
+        if (screenWidth >= 769) {
             nextButton.addEventListener('click', () => {
-                offset += transform;
+                offset += Math.round(calculateMoveDistance());
                 slider.style.transform = `translateX(-${offset}px)`;
-                conditionsForNextArrowButton(771, 1440);
-            });
-            prevButton.addEventListener('click', () => {  
-                offset -= transform;
-                slider.style.transform = `translateX(-${offset}px)`;
-                conditionsForPrevArrowButton(960, 0);
-            });
-        } else if (sliderVisisbleArea <= 768) {
-            totalWidthSlider = 2025;
-            transform = Math.round((totalWidthSlider - sliderVisisbleArea) / 6);
-            nextButton.addEventListener('click', () => {
-                offset += transform;
-                slider.style.transform = `translateX(-${offset}px)`;
-                conditionsForNextArrowButton(1260, 1644);
+                StopMoveForThreeClicksNext();
+                // StopMoveForSixClicks();
             });
             prevButton.addEventListener('click', () => {
-                offset -= transform;
+                offset -= Math.round(calculateMoveDistance());
                 slider.style.transform = `translateX(-${offset}px)`;
-
-                conditionsForPrevArrowButton(1370, 0);
+                StopMoveForThreeClicksPrev();
+            })
+        } else {
+            nextButton.addEventListener('click', () => {
+                offset += Math.round(calculateMoveDistance());
+                slider.style.transform = `translateX(-${offset}px)`;
+                StopMoveForSixClicksNext();
+            });
+            prevButton.addEventListener('click', () => {
+                offset -= Math.round(calculateMoveDistance());
+                slider.style.transform = `translateX(-${offset}px)`;
+                StopMoveForSixClicksPrev();
             })
         }
     };
 
-    const conditionsForNextArrowButton = (size1, size2) => {
-        if (offset == size1 || offset == size2) {
-            nextButton.classList.remove('slider__button-arrow-active');
+    let current = 0;
+    function StopMoveForThreeClicksNext() {
+        current++;
+        console.log(current);
+        if (current >= 3) {
+            nextButton.classList.remove('slider__button-arrow-active');       
             nextButton.setAttribute('disabled', 'true');
-        } else {
+        } else if (current > 0) {
             prevButton.classList.add('slider__button-arrow-active');
+            prevButton.removeAttribute('disabled');
+        }
+    }
+    function StopMoveForThreeClicksPrev() {
+        current--;
+        console.log(current);
+        if (current == 0) {
+            prevButton.classList.remove('slider__button-arrow-active');
+            prevButton.setAttribute('disabled', 'true');
+        } else if (current > 0) {
+            nextButton.classList.add('slider__button-arrow-active');       
             nextButton.removeAttribute('disabled');
+        }  
+    };
+
+    function StopMoveForSixClicksNext() {
+        current++;
+        console.log(current);
+        if (current >= 6) {
+            nextButton.classList.remove('slider__button-arrow-active');       
+            nextButton.setAttribute('disabled', 'true');
+        } else if (current > 0) {
+            prevButton.classList.add('slider__button-arrow-active');
+            prevButton.removeAttribute('disabled');
         }
     };
 
-    const conditionsForPrevArrowButton = (size1, size2) => {
-        if (offset <= size1) {
-            nextButton.classList.add('slider__button-arrow-active');
-            nextButton.removeAttribute('disabled');
-        };
-        if (offset == size2) {
+    function StopMoveForSixClicksPrev() {
+        current--;
+        console.log(current);
+        if (current == 0) {
             prevButton.classList.remove('slider__button-arrow-active');
             prevButton.setAttribute('disabled', 'true');
-        }
-    }
-
+        } else if (current > 0) {
+            nextButton.classList.add('slider__button-arrow-active');       
+            nextButton.removeAttribute('disabled');
+        }  
+    };
+    
     window.addEventListener('resize', init);
     init();
 }
