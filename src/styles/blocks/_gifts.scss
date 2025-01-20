@@ -1,0 +1,65 @@
+.gifts {
+    background-color: var(--main-accent-color);
+    padding-block: 60px;
+    &__cards {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, 310px);
+        grid-template-rows: 342px;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    &__card {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-white);
+        border-radius: 20px;
+        cursor: pointer;
+        &:hover {
+           .fz-16 {
+            color: var(--main-accent-color);
+           } 
+        }
+        &__image {
+            width: 100%;
+            object-fit: cover;
+            height: 230px;
+        }
+        &__footer {
+            border-radius: 20px;
+            padding: 20px 20px 44px 20px;
+            &__title-blue {
+                color: blue;
+                font-size: 12px;
+            }
+            &__title-green {
+                color: green;
+                font-size: 12px;
+            }
+            &__title-blue {
+                color: blue;
+                font-size: 12px;
+            }
+            &__title-pink {
+                color: pink;
+                font-size: 12px;
+            }
+        }
+    }
+}
+@media (max-width: 800px) {
+    .gifts {
+        &__container {
+            padding-inline: 68px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .gifts {
+        &__cards {
+            grid-template-columns: repeat(auto-fill, minmax(310px, 400px));
+            justify-content: center;
+            gap: 12px;
+        }
+    }
+}
