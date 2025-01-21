@@ -1,0 +1,112 @@
+.footer {
+    padding-block: 60px;
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: 60px;
+    }
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        a {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #ecf3f8;
+            border-radius: 20px;
+            row-gap: 12px;
+            text-transform: uppercase;
+            color: var(--color-dark);
+            text-decoration: none;
+            p {
+                font-size: 24px;
+                line-height: 36.48px;
+                letter-spacing: .16em;
+                margin-bottom: 0;
+                font-weight: 600;
+            }
+            span {
+                font-size: 16px;
+                line-height: 24.32px;
+                letter-spacing: .08em;
+                font-weight: 600;
+            }
+            &:hover {
+                color: var(--main-accent-color);
+            }
+        }
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        p {
+            margin-bottom: 0;
+            font-size: 16px;
+            line-height: 23.68px;
+            font-weight: 400;
+        }
+        a {
+            color: #181c29;
+            font-family: "Allura", cursive;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 1em;
+            letter-spacing: .05em;
+            transition: all linear .3s;
+            text-decoration: none;
+            &:hover {
+                color: var(--main-accent-color);
+            }
+        }
+    }
+    &__social {
+        display: flex;
+        column-gap: 12px;
+        a {
+            width: 40px;
+            height: 40px;
+            color: var(--color-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+                color: var(--main-accent-color);
+            }
+        }
+    }
+}
+@media (max-width: 1187px) {
+    .footer {
+        &__list {
+            a {
+                p {
+                    font-size: 18px;
+                    letter-spacing: .10em;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 910px) {
+    .footer {
+        &__container {
+            padding-inline: 10px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .footer {
+        &__container {
+            padding-inline: 8px;
+        }
+        &__list {
+            grid-template-columns: 1fr;
+        }
+    }
+}
