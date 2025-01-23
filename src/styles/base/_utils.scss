@@ -14,7 +14,7 @@
     display: block !important;
 }
 .hide {
-    display: none;
+    display: none !important;
 }
 .transform-next {
     transform: translateX(-135px);
@@ -24,4 +24,7 @@
 }
 .fz-16 {
     font-size: 16px;
+}
+a {
+    text-decoration: none;
 }

@@ -17,13 +17,16 @@
             align-items: center;
             column-gap: 8px;
         }
-        &-item {
-            padding: 12px 20px;
-        }
         &-link {
-            height: 40px;
-            display: inline-flex;
-            align-items: center;
+            display: inline-block;
+            padding: 12px 20px;
+            color: #181c29;
+            transition: all linear .3s;
+            border-radius: 12px;
+            &:hover {
+            color: #ff4646;
+            background: rgba(255, 70, 70, .1);
+            }
         }
     }
 }

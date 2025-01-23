@@ -24,6 +24,9 @@ function timer() {
 
               upDateOclock();
         function upDateOclock() {
+            if (!days) {
+                return;
+            }
             const t = getTimeRemaining(endtime);
             days.textContent = t.days;
             hours.textContent = t.hours;

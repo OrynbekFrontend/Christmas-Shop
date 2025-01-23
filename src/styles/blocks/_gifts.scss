@@ -22,7 +22,7 @@
         }
         &__image {
             width: 100%;
-            object-fit: cover;
+            object-fit: contain;
             height: 230px;
         }
         &__footer {
@@ -46,6 +46,52 @@
             }
         }
     }
+    &__title {
+        font-family: var(--font-family);
+        font-weight: 600;
+        font-size: 32px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        text-align: center;
+        color: var(--color-white);
+        max-width: 426px;
+        margin: 0 auto;
+    }
+    &__2 {
+        background-image: url(../images/bg-garland.png);
+        background-size: 100%, auto;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+    }
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 8px;
+        div {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--color-white);
+            cursor: pointer;
+            &:hover {
+                background: hsla(0, 0%, 100%, .2);
+            }
+            &.active {
+                background: hsla(0, 0%, 100%, .2);
+            }
+        }
+    }
+    &__content {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
 }
 @media (max-width: 800px) {
     .gifts {
@@ -60,6 +106,33 @@
             grid-template-columns: repeat(auto-fill, minmax(310px, 400px));
             justify-content: center;
             gap: 12px;
+        }
+    }
+}
+@media (max-width: 1200px) {
+    .gifts {
+        &__content {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        &__container {
+            padding-inline: 60px;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .gifts {
+        &__content {
+            grid-template-columns: 1fr;
+            padding-inline: 27px;
+        }
+        &__container {
+            padding-inline: 8px;
+        }
+        &__list {
+            gap: 0;
+            div {
+                padding: 12px 8px;
+            }
         }
     }
 }

@@ -15,6 +15,11 @@ function slider() {
     let offset = 0;
     function init() {
         const screenWidth = window.innerWidth;
+
+        if (!nextButton || !prevButton || !slider) {
+            return;
+        }
+
         if (screenWidth >= 769) {
             nextButton.addEventListener('click', () => {
                 offset += Math.round(calculateMoveDistance());
